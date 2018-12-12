@@ -1,0 +1,30 @@
+{
+  "name": "literal-toolkit",
+  "version": "1.0.0",
+  "description": "A toolkit to parse and generate JavaScript style literals.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyurl/literal-toolkit.git"
+  },
+  "keywords": [
+    "number",
+    "literal"
+  ],
+  "author": "Ayon Lee <i@hyurl.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyurl/literal-toolkit/issues"
+  },
+  "homepage": "https://github.com/hyurl/literal-toolkit#readme",
+  "devDependencies": {
+    "@types/node": "^10.12.12",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "safe-string-literal": "^1.0.0"
+  }
+}
