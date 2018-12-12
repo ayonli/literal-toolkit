@@ -169,5 +169,7 @@ describe("Generating number literals from numbers", () => {
         assert.strictEqual(number.toLiteral(12345, number.DEC), "12345");
         assert.strictEqual(number.toLiteral(12345, 16), "0x3039");
         assert.strictEqual(number.toLiteral(12345, number.HEX), "0x3039");
+        assert.strictEqual(number.toLiteral(NaN), "NaN");
+        assert.strictEqual(number.toLiteral(Infinity), "Infinity");
     });
 });
