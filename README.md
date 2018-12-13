@@ -44,7 +44,7 @@ functions that can be used to parse and generate literals.
     - `toLiteral(num: number, radix?: 8 | 10 | 16): string`
 
 - `keyword` Includes `true`, `false`, `null`, `NaN` and `Infinity`
-    `KeywordToken` extends `LiteralToken`
+    - `KeywordToken` extends `LiteralToken`
         - `value: true | false | null | number`
     - `parse(str: string): KeywordToken["value"]`
     - `parseToken(str: string): KeywordToken`
