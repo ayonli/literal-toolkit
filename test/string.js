@@ -78,8 +78,8 @@ describe("Parsing string literals", () => {
     });
 
     it("should return null if the string contains unexpected token", () => {
-        assert.strictEqual(string.parse("abc'this is a invalid string literal'"), null);
-        assert.strictEqual(string.parse("'this is a invalid\n string literal'"), null);
+        assert.strictEqual(string.parse("abc'this is a invalid string literal'"), undefined);
+        assert.strictEqual(string.parse("'this is a invalid\n string literal'"), undefined);
     });
 });
 

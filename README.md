@@ -71,7 +71,7 @@ the second argument for parsing numeric strings non-strictly.
 
 All `parse()` functions are short-cuts of `parseToken(str).value` (might include
 additional features). All these functions, when the given string cannot be 
-parsed, will return `null` by default.
+parsed, will return `undefined` instead.
 
 All `parse()` functions are just for simple parsing usage, when dealing with 
 complex tasks, use `parseToken()` instead.
@@ -107,5 +107,5 @@ comment.parse("/** this is a JSDoc comment */");
 
 This toolkit is meant to parse any valid JavaScript literal strings (of 
 supported types) into real values, so any form that works in JavaScript syntax 
-can be parsed by this package, although the above example may not cover that 
+can be parsed by this package, although the above example doesn't cover that 
 much.

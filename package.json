@@ -23,7 +23,6 @@
   "homepage": "https://github.com/hyurl/literal-toolkit#readme",
   "devDependencies": {
     "@types/node": "^10.12.12",
-    "lodash": "^4.17.11",
     "mocha": "^5.2.0"
   },
   "dependencies": {

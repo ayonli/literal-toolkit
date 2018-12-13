@@ -65,10 +65,10 @@ describe("Parsing regular expression literals", () => {
     });
 
     it("should return null if the literal is invalid", () => {
-        assert.strictEqual(regexp.parse("a/[a-z]/i"), null);
-        assert.strictEqual(regexp.parse("//[a-z]/i"), null);
-        assert.strictEqual(regexp.parse("/[a-z]//i"), null);
-        assert.strictEqual(regexp.parse("/[a-z]/a"), null);
+        assert.strictEqual(regexp.parse("a/[a-z]/i"), undefined);
+        assert.strictEqual(regexp.parse("//[a-z]/i"), undefined);
+        assert.strictEqual(regexp.parse("/[a-z]//i"), undefined);
+        assert.strictEqual(regexp.parse("/[a-z]/a"), undefined);
     });
 });
 
