@@ -28,7 +28,7 @@ functions that can be used to parse and generate literals.
         - <code>quote: "'" | "\"" | "`"</code>
     - `parse(str: string): string`
     - `parseToken(str: string): StringToken`
-    - `toLiteral(str: string, quote?: "'" | "\"" | "`"): string`
+    - <code>toLiteral(str: string, quote?: "'" | "\"" | "`"): string</code>
 
 - `number`
     - `NumberToken` extends `LiteralToken`
