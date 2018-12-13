@@ -18,9 +18,9 @@ There are several interfaces under this package, each of them have the similar
 functions that can be used to parse and generate literals.
 
 - `LiteralToken`
-    - `source: string`
-    - `offset: number`
-    - `length: number`
+    - `source: string` will exclude any leading spaces.
+    - `offset: number` the index position where `source` starts.
+    - `length: number` the length of the `source` string.
 
 - `string`
     - `StringToken` extends `LiteralToken`
@@ -69,12 +69,43 @@ All `parseToken()` functions, when the given string cannot be parsed, will
 return `null` by default, except for `number.parseToken()` that allows you set 
 the second argument for parsing numeric strings non-strictly.
 
-All `parse()` functions, except `number.parse()`, when the given string cannot 
-be parsed, will return `null` by default. While for `number.parse()`, by default
-will parse the given string in non-strict mode, unless setting `strict` argument,
-and this function will return `NaN` instead of `null` if given a invalid literal.
+All `parse()` functions are short-cuts of `parseToken(str).value` (might include
+additional features). All these functions, when the given string cannot be 
+parsed, will return `null` by default.
 
 All `parse()` functions are just for simple parsing usage, when dealing with 
 complex tasks, use `parseToken()` instead.
 
 For detailed API documentation, please reference to [interface declarations](./index.d.ts).
+
+## Usage
+
+```javascript
+import { string, number, keyword, regexp, comment } from "literal-toolkit";
+
+string.parse('"this is a double-quoted string literal"');
+string.parse("'this is a single-quoted string literal'");
+string.parse("`this is a back-quoted\n and multi-line string`");
+
+number.parse("1234567"); // decimal number: 1234567
+number.parse("01234567"); // octal number: 01234567
+number.parse("0x1234567"); // hexadecimal number: 0x1234567
+
+keyword.parse("true"); // boolean: true
+keyword.parse("false"); // boolean: false
+keyword.parse("null"); // null
+keyword.parse("NaN"); // number: NaN
+keyword.parse("Infinity"); // number: Infinity
+
+regexp.parse("/[a-zA-Z0-9]/i"); // RegExp: /[a-zA-Z0-9]/i
+
+comment.parse("// this is a single-line comment");
+comment.parse("/* this is a inline comment */");
+comment.parse("/* this comment contains\n multiple\n lines */");
+comment.parse("/** this is a JSDoc comment */");
+```
+
+This toolkit is meant to parse any valid JavaScript literal strings (of 
+supported types) into real values, so any form that works in JavaScript syntax 
+can be parsed by this package, although the above example may not cover that 
+much.

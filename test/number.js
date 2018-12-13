@@ -106,19 +106,6 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("01234567]", true), 01234567);
         assert.strictEqual(number.parse("0123456789}", true), 123456789);
     });
-
-    it("should parse invalid literals to NaN as expected", () => {
-        assert.ok(isNaN(number.parse("this is obviously not a number")));
-        assert.ok(isNaN(number.parse("abc1234567")));
-        assert.ok(isNaN(number.parse("01234567abc", true)));
-        assert.ok(isNaN(number.parse("01234567abc", true)));
-        assert.ok(isNaN(number.parse("-01234567abc", true)));
-        assert.ok(isNaN(number.parse("+01234567abc", true)));
-        assert.ok(isNaN(number.parse("01234567.123", true)));
-        assert.ok(isNaN(number.parse("1234567.123.123", true)));
-        assert.ok(isNaN(number.parse("0x123abc.123", true)));
-        assert.ok(isNaN(number.parse("0x123abc 123", true)));
-    });
 });
 
 describe("Parsing tokens from number literals", () => {
