@@ -5,6 +5,9 @@ export declare interface LiteralToken {
 }
 
 export declare namespace string {
+    const SINGLE_QUOTE: "'";
+    const DOUBLE_QUOTE: '"';
+    const BACK_QUOTE: "`";
     interface StringToken extends LiteralToken {
         value: string;
         quote: "'" | "\"" | "`";
@@ -15,12 +18,15 @@ export declare namespace string {
 }
 
 export declare namespace number {
+    const OCT: 8;
+    const DEC: 10;
+    const HEX: 16;
     interface NumberToken extends LiteralToken {
         value: number;
         radix: 8 | 10 | 16;
     }
-    function parse(str: string): number;
-    function parseToken(str: string): NumberToken;
+    function parse(str: string, strict?: boolean): number;
+    function parseToken(str: string, allowTrailings?: boolean): NumberToken;
     function isOct(str: string): boolean;
     function isDec(str: string): boolean;
     function isHex(str: string): boolean;
@@ -30,7 +36,7 @@ export declare namespace number {
 }
 
 export declare namespace keyword {
-    interface KeywordToken {
+    interface KeywordToken extends LiteralToken {
         value: true | false | null | number;
     }
     function parse(str: string): KeywordToken["value"];
@@ -39,7 +45,7 @@ export declare namespace keyword {
 }
 
 export declare namespace regexp {
-    interface RegExpToken {
+    interface RegExpToken extends LiteralToken {
         value: RegExp;
     }
     function parse(str: string): RegExp;
@@ -48,7 +54,7 @@ export declare namespace regexp {
 }
 
 export declare namespace comment {
-    interface CommentToken {
+    interface CommentToken extends LiteralToken {
         value: string,
         type: "//" | "/*" | "/**"
     }
