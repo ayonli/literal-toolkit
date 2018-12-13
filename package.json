@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A toolkit to parse and generate JavaScript style literals.",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "mocha"
   },
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/hyurl/literal-toolkit#readme",
   "devDependencies": {
     "@types/node": "^10.12.12",
+    "lodash": "^4.17.11",
     "mocha": "^5.2.0"
   },
   "dependencies": {

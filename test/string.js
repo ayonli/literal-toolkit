@@ -77,28 +77,9 @@ describe("Parsing string literals", () => {
         assert.equal(string.parse(input), expected);
     });
 
-    it("should throw error when the string contains unexpected token", () => {
-        var input = "abc'this is a invalid string literal'";
-        var err;
-
-        try {
-            string.parse(input);
-        } catch (e) {
-            err = e;
-        } finally {
-            assert.ok(err instanceof SyntaxError);
-        }
-
-        input = "'this is a invalid\n string literal'";
-        err = null;
-
-        try {
-            string.parse(input);
-        } catch (e) {
-            err = e;
-        } finally {
-            assert.ok(err instanceof SyntaxError);
-        }
+    it("should return null if the string contains unexpected token", () => {
+        assert.strictEqual(string.parse("abc'this is a invalid string literal'"), null);
+        assert.strictEqual(string.parse("'this is a invalid\n string literal'"), null);
     });
 });
 
@@ -106,6 +87,7 @@ describe("Parsing tokens from string literals", () => {
     it("should parse the single-line string as expected", () => {
         var input = '"this is a single-line string"';
         var expected = {
+            source: input,
             quote: '"',
             value: "this is a single-line string",
             offset: 0,
@@ -117,6 +99,7 @@ describe("Parsing tokens from string literals", () => {
     it("should parse the single-line string with leading spaces as expected", () => {
         var input = '    "this is a single-line string"';
         var expected = {
+            source: input.slice(4),
             quote: '"',
             value: "this is a single-line string",
             offset: 4,
@@ -128,6 +111,7 @@ describe("Parsing tokens from string literals", () => {
     it("should parse the multi-line string as expected", () => {
         var input = '"this is a\\\n multi-line string"';
         var expected = {
+            source: input,
             quote: '"',
             value: "this is a multi-line string",
             offset: 0,
@@ -137,6 +121,7 @@ describe("Parsing tokens from string literals", () => {
 
         var input = '`this is another\n multi-line string`';
         var expected = {
+            source: input,
             quote: '`',
             value: "this is another\n multi-line string",
             offset: 0,

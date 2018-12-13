@@ -122,6 +122,7 @@ describe("Parsing numbers from strings", () => {
 describe("Parsing tokens from number literals", () => {
     it("should parse the number literal as expected", () => {
         assert.deepStrictEqual(number.parseToken("012345"), {
+            source: "012345",
             radix: 8,
             value: 012345,
             offset: 0,
@@ -131,6 +132,7 @@ describe("Parsing tokens from number literals", () => {
 
     it("should parse the number literal with leading spaces as expected", () => {
         assert.deepStrictEqual(number.parseToken("    012345"), {
+            source: "012345",
             radix: 8,
             value: 012345,
             offset: 4,
@@ -141,6 +143,7 @@ describe("Parsing tokens from number literals", () => {
 
     it("should parse the number literal with trailing boundaries as expected", () => {
         assert.deepStrictEqual(number.parseToken("012345,"), {
+            source: "012345",
             radix: 8,
             value: 012345,
             offset: 0,
@@ -148,16 +151,8 @@ describe("Parsing tokens from number literals", () => {
         });
     });
 
-    it("should throw error when the number literal in invalid as expected", () => {
-        var err;
-
-        try {
-            number.parseToken("012345abc");
-        } catch (e) {
-            err = e;
-        } finally {
-            assert.ok(err instanceof SyntaxError);
-        }
+    it("should return null when the number literal is invalid", () => {
+        assert.strictEqual(number.parseToken("012345abc"), null);
     });
 });
 
