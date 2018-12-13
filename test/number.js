@@ -62,9 +62,11 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("-0x123abc"), -0x123abc);
     });
 
-    it("should parse scientific numbers as expected", () => {
+    it("should parse scientific notations as expected", () => {
         assert.strictEqual(number.parse("123e10"), 123e10);
         assert.strictEqual(number.parse("123E10"), 123E10);
+        assert.strictEqual(number.parse("1e+10"), 1e+10);
+        assert.strictEqual(number.parse("1e-10"), 1e-10);
         assert.strictEqual(number.parse("1.1e10"), 1.1e10);
     });
 
