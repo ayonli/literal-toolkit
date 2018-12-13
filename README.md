@@ -4,7 +4,7 @@
 
 In case to write a pseudo code implementation or data structure, this toolkit 
 will help a lot on parsing and generating strings, numbers, regular expressions,
-values in special keywords, and even comments.
+keyword values, and even comments.
 
 ## Install
 
@@ -35,7 +35,7 @@ functions that can be used to parse and generate literals.
         - `value: number`
         - `radix: 8 | 10 | 16`
     - `parse(str: string, strict?: boolean): number`
-    - `parseToken(str: string, allowTrailings?: boolean): NumberToken`
+    - `parseToken(str: string): NumberToken`
     - `isOct(str: string): boolean`
     - `isDec(str: string): boolean`
     - `isHex(str: string): boolean`
@@ -66,17 +66,16 @@ functions that can be used to parse and generate literals.
     - `toLiteral(str: string, type?: "//" | "/*" | "/**", inden?: string): string`
 
 All `parseToken()` functions, when the given string cannot be parsed, will 
-return `null` by default, except for `number.parseToken()` that allows you set 
-the second argument for parsing numeric strings non-strictly.
+return `null` by default.
 
 All `parse()` functions are short-cuts of `parseToken(str).value` (might include
 additional features). All these functions, when the given string cannot be 
 parsed, will return `undefined` instead.
 
 All `parse()` functions are just for simple parsing usage, when dealing with 
-complex tasks, use `parseToken()` instead.
+complex scenarios, use `parseToken()` instead.
 
-For detailed API documentation, please reference to [interface declarations](./index.d.ts).
+For detailed API documentation, please redirect to [interface declarations](./index.d.ts).
 
 ## Usage
 
@@ -108,4 +107,4 @@ comment.parse("/** this is a JSDoc comment */");
 This toolkit is meant to parse any valid JavaScript literal strings (of 
 supported types) into real values, so any form that works in JavaScript syntax 
 can be parsed by this package, although the above example doesn't cover that 
-much.
+much. Check the [test](./test) for more examples.
