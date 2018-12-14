@@ -15,6 +15,7 @@ describe("Testing numbers from strings", () => {
         assert.strictEqual(number.isDec("012345678.123"), true);
         assert.strictEqual(number.isDec("1e12"), true);
         assert.strictEqual(number.isDec("1.1e12"), true);
+        assert.strictEqual(number.isDec(".123"), true);
     });
 
     it("should check hexadecimal numbers as expected", () => {
@@ -43,6 +44,7 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("1234567"), 1234567);
         assert.strictEqual(number.parse("1234567.123"), 1234567.123);
         assert.strictEqual(number.parse("0123456789"), 123456789);
+        assert.strictEqual(number.parse(".123"), 0.123);
     });
 
     it("should parse hexadecimal numbers as expected", () => {
