@@ -39,25 +39,25 @@ describe("Parsing regular expression literals", () => {
     });
 
     it("should parse regular expressions with trailing boundaries as expected", () => {
-        var re = regexp.parse("/[a-z]/i,");
+        var re = regexp.parse("/[a-z]/i,123");
         var re2 = /[a-z]/i;
         var result = { source: re.source, flags: re.flags };
         var expected = { source: re2.source, flags: re2.flags };
         assert.deepStrictEqual(result, expected);
 
-        re = regexp.parse("/[a-z]/im;");
+        re = regexp.parse("/[a-z]/im;123");
         re2 = /[a-z]/im;
         result = { source: re.source, flags: re.flags };
         expected = { source: re2.source, flags: re2.flags };
         assert.deepStrictEqual(result, expected);
 
-        re = regexp.parse("/[a-z]/gimsuy]");
+        re = regexp.parse("/[a-z]/gimsuy]123");
         re2 = /[a-z]/gimsuy;
         result = { source: re.source, flags: re.flags };
         expected = { source: re2.source, flags: re2.flags };
         assert.deepStrictEqual(result, expected);
 
-        re = regexp.parse("/^\\s*\\/\\/.*\\n*?/}");
+        re = regexp.parse("/^\\s*\\/\\/.*\\n*?/}123");
         re2 = /^\s*\/\/.*\n*?/;
         result = { source: re.source, flags: re.flags };
         expected = { source: re2.source, flags: re2.flags };

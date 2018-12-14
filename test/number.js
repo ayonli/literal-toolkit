@@ -103,10 +103,12 @@ describe("Parsing numbers from strings", () => {
     });
 
     it("should parse numbers with trailing boundaries in strict mode as expected", () => {
-        assert.strictEqual(number.parse("01234567,", true), 01234567);
-        assert.strictEqual(number.parse("1234567;", true), 1234567);
-        assert.strictEqual(number.parse("01234567]", true), 01234567);
-        assert.strictEqual(number.parse("0123456789}", true), 123456789);
+        assert.strictEqual(number.parse("01234567,123", true), 01234567);
+        assert.strictEqual(number.parse("1234567;123", true), 1234567);
+        assert.strictEqual(number.parse("1234567:123", true), 1234567);
+        assert.strictEqual(number.parse("01234567)123", true), 01234567);
+        assert.strictEqual(number.parse("01234567]123", true), 01234567);
+        assert.strictEqual(number.parse("0123456789}123", true), 123456789);
     });
 });
 

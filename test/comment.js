@@ -21,8 +21,8 @@ describe("Parsing comment literals", () => {
     });
 
     it("should parse comment literals with trailing characters as expected", () => {
-        assert.strictEqual(comment.parse("  /* this is a inline comment */abc"), "/* this is a inline comment */");
-        assert.strictEqual(comment.parse("   /* this is a\n multi-line comment */abc"), "/* this is a\n multi-line comment */");
+        assert.strictEqual(comment.parse("  /* this is a inline comment */123"), "/* this is a inline comment */");
+        assert.strictEqual(comment.parse("   /* this is a\n multi-line comment */123"), "/* this is a\n multi-line comment */");
     });
 
     it("should parse comment literals and strip meaningless characters as expected", () => {

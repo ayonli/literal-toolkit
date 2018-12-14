@@ -63,17 +63,23 @@ describe("Parsing string literals", () => {
     });
 
     it("should parse the strings with trailing boundaries as expected", () => {
-        var input = "'this is a string literal with two trailing spaces',";
-        var expected = "this is a string literal with two trailing spaces";
+        var input = "'this is a string literal with trailing boundary',123";
+        var expected = "this is a string literal with trailing boundary";
         assert.equal(string.parse(input), expected);
 
-        input = "'this is a string literal with two trailing spaces';";
+        input = "'this is a string literal with trailing boundary';123";
         assert.equal(string.parse(input), expected);
 
-        input = "'this is a string literal with two trailing spaces']";
+        input = "'this is a string literal with trailing boundary')123";
         assert.equal(string.parse(input), expected);
 
-        input = "'this is a string literal with two trailing spaces'}";
+        input = "'this is a string literal with trailing boundary':123";
+        assert.equal(string.parse(input), expected);
+
+        input = "'this is a string literal with trailing boundary']123";
+        assert.equal(string.parse(input), expected);
+
+        input = "'this is a string literal with trailing boundary'}123";
         assert.equal(string.parse(input), expected);
     });
 

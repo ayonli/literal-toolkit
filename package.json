@@ -12,7 +12,11 @@
     "url": "git+https://github.com/hyurl/literal-toolkit.git"
   },
   "keywords": [
+    "string",
     "number",
+    "boolean",
+    "regexp",
+    "comment",
     "literal"
   ],
   "author": "Ayon Lee <i@hyurl.com>",

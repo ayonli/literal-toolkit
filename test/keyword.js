@@ -22,10 +22,11 @@ describe("Parsing keyword literals", () => {
 
     it("should parse keyword literals with trailing boundaries as expected", () => {
         assert.strictEqual(keyword.parse("true "), true);
-        assert.strictEqual(keyword.parse("false,"), false);
-        assert.strictEqual(keyword.parse("null;"), null);
-        assert.strictEqual(keyword.parse("Infinity]"), Infinity);
-        assert.ok(isNaN(keyword.parse("NaN}")));
+        assert.strictEqual(keyword.parse("false,123"), false);
+        assert.strictEqual(keyword.parse("null;123"), null);
+        assert.strictEqual(keyword.parse("Infinity)123"), Infinity);
+        assert.strictEqual(keyword.parse("Infinity]123"), Infinity);
+        assert.ok(isNaN(keyword.parse("NaN}abc")));
     });
 });
 
