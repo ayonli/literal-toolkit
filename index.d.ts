@@ -119,6 +119,11 @@ export declare namespace keyword {
 
 export declare namespace regexp {
     interface RegExpToken extends LiteralToken {
+        /**
+         * NOTICE: regular expression flags is not always valid, before ES2015, 
+         * flags `s`, `u` and `y` is not supported, and a SyntaxError will be 
+         * thrown if the given string contains any of this flags.
+         */
         value: RegExp;
     }
 
