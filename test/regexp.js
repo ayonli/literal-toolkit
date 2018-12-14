@@ -17,15 +17,11 @@ describe("Parsing regular expression literals", () => {
         expected = { source: re2.source, flags: re2.flags };
         assert.deepStrictEqual(result, expected);
 
-        try {
-            re = regexp.parse("/[a-z]/gimsuy");
-            re2 = /[a-z]/gimsuy;
-            result = { source: re.source, flags: re.flags };
-            expected = { source: re2.source, flags: re2.flags };
-            assert.deepStrictEqual(result, expected);
-        } catch (err) {
-            assert.ok(err instanceof SyntaxError);
-        }
+        re = regexp.parse("/[a-z]/gimsuy");
+        re2 = /[a-z]/gimsuy;
+        result = { source: re.source, flags: re.flags };
+        expected = { source: re2.source, flags: re2.flags };
+        assert.deepStrictEqual(result, expected);
 
         re = regexp.parse("/^\\s*\\/\\/.*\\n*?/");
         re2 = /^\s*\/\/.*\n*?/;
@@ -55,15 +51,11 @@ describe("Parsing regular expression literals", () => {
         expected = { source: re2.source, flags: re2.flags };
         assert.deepStrictEqual(result, expected);
 
-        try {
-            re = regexp.parse("/[a-z]/gimsuy]123");
-            re2 = /[a-z]/gimsuy;
-            result = { source: re.source, flags: re.flags };
-            expected = { source: re2.source, flags: re2.flags };
-            assert.deepStrictEqual(result, expected);
-        } catch (err) {
-            assert.ok(err instanceof SyntaxError);
-        }
+        re = regexp.parse("/[a-z]/gimsuy]123");
+        re2 = /[a-z]/gimsuy;
+        result = { source: re.source, flags: re.flags };
+        expected = { source: re2.source, flags: re2.flags };
+        assert.deepStrictEqual(result, expected);
 
         re = regexp.parse("/^\\s*\\/\\/.*\\n*?/}123");
         re2 = /^\s*\/\/.*\n*?/;
