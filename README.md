@@ -33,15 +33,16 @@ functions that can be used to parse and generate literals.
 - `number`
     - `NumberToken` extends `LiteralToken`
         - `value: number`
-        - `radix: 8 | 10 | 16`
+        - `radix: 2 | 8 | 10 | 16`
     - `parse(str: string, strict?: boolean): number`
     - `parseToken(str: string): NumberToken`
+    - `isBin(str: string): boolean`
     - `isOct(str: string): boolean`
     - `isDec(str: string): boolean`
     - `isHex(str: string): boolean`
     - `isNaN(str: string): boolean`
     - `isFinite(str: string): boolean`
-    - `toLiteral(num: number, radix?: 8 | 10 | 16): string`
+    - `toLiteral(num: number, radix?: 2 | 8 | 10 | 16): string`
 
 - `keyword` Includes `true`, `false`, `null`, `NaN` and `Infinity`
     - `KeywordToken` extends `LiteralToken`
@@ -87,7 +88,9 @@ string.parse("'this is a single-quoted string literal'");
 string.parse("`this is a back-quoted\n and multi-line string`");
 
 number.parse("1234567"); // decimal number: 1234567
-number.parse("01234567"); // octal number: 01234567
+number.parse("0b1010101"); // binary number: 0b1010101
+number.parse("0o1234567"); // octal number: 0o1234567
+number.parse("01234567"); // octal number without 'o': 01234567
 number.parse("0x1234567"); // hexadecimal number: 0x1234567
 
 keyword.parse("true"); // boolean: true

@@ -2,8 +2,16 @@ const assert = require("assert");
 const number = require("..").number;
 
 describe("Testing numbers from strings", () => {
+    it("should check binary numbers as expected", () => {
+        assert.strictEqual(number.isBin("0b1010101"), true);
+        assert.strictEqual(number.isBin("0B1010101"), true);
+        assert.strictEqual(number.isBin("01010101"), false);
+    });
+
     it("should check octal numbers as expected", () => {
         assert.strictEqual(number.isOct("01234567"), true);
+        assert.strictEqual(number.isOct("0o1234567"), true);
+        assert.strictEqual(number.isOct("0O1234567"), true);
         assert.strictEqual(number.isOct("012345678"), false);
         assert.strictEqual(number.isOct("01010101"), true);
     });
@@ -21,6 +29,7 @@ describe("Testing numbers from strings", () => {
     it("should check hexadecimal numbers as expected", () => {
         assert.strictEqual(number.isHex("0x1f"), true);
         assert.strictEqual(number.isHex("0x1F "), true);
+        assert.strictEqual(number.isHex("0X1F "), true);
         assert.strictEqual(number.isHex("0x1G"), false);
         assert.strictEqual(number.isHex("01F"), false);
     });
@@ -36,8 +45,15 @@ describe("Testing numbers from strings", () => {
 });
 
 describe("Parsing numbers from strings", () => {
+    it("should parse binary numbers as expected", () => {
+        assert.strictEqual(number.parse("0b1010101"), 0b1010101);
+        assert.strictEqual(number.parse("0B1010101"), 0b1010101);
+    });
+
     it("should parse octal numbers as expected", () => {
         assert.strictEqual(number.parse("01234567"), 01234567);
+        assert.strictEqual(number.parse("0o1234567"), 01234567);
+        assert.strictEqual(number.parse("0O1234567"), 01234567);
     });
 
     it("should parse decimal numbers as expected", () => {
@@ -50,12 +66,16 @@ describe("Parsing numbers from strings", () => {
     it("should parse hexadecimal numbers as expected", () => {
         assert.strictEqual(number.parse("0x1234567"), 0x1234567);
         assert.strictEqual(number.parse("0x123abc"), 0x123abc);
+        assert.strictEqual(number.parse("0X123ABC"), 0x123abc);
         assert.strictEqual(number.parse("0x123abc.123"), 0x123abc);
     });
 
     it("should parse numbers with signed marks as expected", () => {
+        assert.strictEqual(number.parse("+0b0101"), 0b0101);
+        assert.strictEqual(number.parse("-0b0101"), -0b0101);
         assert.strictEqual(number.parse("+01234567"), 01234567);
         assert.strictEqual(number.parse("-01234567"), -01234567);
+        assert.strictEqual(number.parse("-0o1234567"), -0o1234567);
         assert.strictEqual(number.parse("+1234567"), 1234567);
         assert.strictEqual(number.parse("+1234567.123"), 1234567.123);
         assert.strictEqual(number.parse("-1234567"), -1234567);
@@ -151,8 +171,10 @@ describe("Parsing tokens from number literals", () => {
 
 describe("Generating number literals from numbers", () => {
     it("should produce octal, decimal and hexadecimal numbers as expected", () => {
-        assert.strictEqual(number.toLiteral(12345, 8), "030071");
-        assert.strictEqual(number.toLiteral(12345, number.OCT), "030071");
+        assert.strictEqual(number.toLiteral(12345, 2), "0b11000000111001");
+        assert.strictEqual(number.toLiteral(12345, number.BIN), "0b11000000111001");
+        assert.strictEqual(number.toLiteral(12345, 8), "0o30071");
+        assert.strictEqual(number.toLiteral(12345, number.OCT), "0o30071");
         assert.strictEqual(number.toLiteral(12345, 10), "12345");
         assert.strictEqual(number.toLiteral(12345, number.DEC), "12345");
         assert.strictEqual(number.toLiteral(12345, 16), "0x3039");

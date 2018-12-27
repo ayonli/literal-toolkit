@@ -57,9 +57,10 @@ export declare namespace number {
          * the given string, just like the JavaScript syntax itself does.
          */
         value: number;
-        radix: 8 | 10 | 16;
+        radix: 2 | 8 | 10 | 16;
     }
 
+    const BIN: 2;
     const OCT: 8;
     const DEC: 10;
     const HEX: 16;
@@ -78,6 +79,8 @@ export declare namespace number {
      * unexpected tokens.
      */
     function parseToken(str: string): NumberToken;
+    /** Checks if the given string can be parsed as an binary number. */
+    function isBin(str: string): boolean;
     /** Checks if the given string can be parsed as an octal number. */
     function isOct(str: string): boolean;
     /** Checks if the given string can be parsed as a decimal number. */
@@ -92,7 +95,7 @@ export declare namespace number {
      * Generates a number literal according to the given number. By default, 
      * `radix` is set to `10` (decimal).
      */
-    function toLiteral(num: number, radix?: 8 | 10 | 16): string;
+    function toLiteral(num: number, radix?: 2 | 8 | 10 | 16): string;
 }
 
 export declare namespace keyword {
