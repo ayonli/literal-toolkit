@@ -72,7 +72,7 @@ describe("Parsing regular expression literals", () => {
         assert.deepStrictEqual(result, expected);
     });
 
-    it("should return null if the literal is invalid", () => {
+    it("should return undefined if the literal is invalid", () => {
         assert.strictEqual(regexp.parse("a/[a-z]/i"), undefined);
         assert.strictEqual(regexp.parse("//[a-z]/i"), undefined);
         assert.strictEqual(regexp.parse("/[a-z]//i"), undefined);

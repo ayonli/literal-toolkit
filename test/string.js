@@ -24,7 +24,7 @@ describe("Parsing string literals", () => {
         input = "'this\\' is\" a` single-line string with quotes'";
         assert.equal(string.parse(input), expected);
 
-        input = "`this' is\" a\\` single-line string with quotes'";
+        input = "`this' is\" a\\` single-line string with quotes`";
         assert.equal(string.parse(input), expected);
     });
 
@@ -83,9 +83,14 @@ describe("Parsing string literals", () => {
         assert.equal(string.parse(input), expected);
     });
 
-    it("should return null if the string contains unexpected token", () => {
+    it("should return undefined if the string contains unexpected token", () => {
         assert.strictEqual(string.parse("abc'this is a invalid string literal'"), undefined);
         assert.strictEqual(string.parse("'this is a invalid\n string literal'"), undefined);
+    });
+
+    it("should return undefined if the string misses the close quote", () => {
+        assert.strictEqual(string.parse("'this is a invalid string literal"), undefined);
+        assert.strictEqual(string.parse('"this is a invalid\n string literal'), undefined);
     });
 });
 
