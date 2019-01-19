@@ -56,7 +56,7 @@ export declare namespace number {
          * `Number()`, this parser is able to automatically detect `radix` of 
          * the given string, just like the JavaScript syntax itself does.
          */
-        value: number;
+        value: number | bigint;
         radix: 2 | 8 | 10 | 16;
     }
 
@@ -72,7 +72,7 @@ export declare namespace number {
      * parsed to number, any continuing characters will be ignored. set `strict`
      * to turn off this behavior.
      */
-    function parse(str: string, strict?: boolean): number;
+    function parse(str: string, strict?: boolean): number | bigint;
     /**
      * Parses the given number literal into a token object that contains useful 
      * meta data of the token, may return `null` if the given string includes 
@@ -91,6 +91,8 @@ export declare namespace number {
     function isNaN(str: string): boolean;
     /** Checks if the given string can be parsed as a finite number. */
     function isFinite(str: string): boolean;
+    /** Checks if the given string can be parsed as a BigInt number. */
+    function isBigInt(str: string): boolean;
     /**
      * Generates a number literal according to the given number. By default, 
      * `radix` is set to `10` (decimal).

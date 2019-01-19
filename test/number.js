@@ -70,6 +70,12 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("0x123abc.123"), 0x123abc);
     });
 
+    it("should parse BigInt numbers as expected", () => {
+        if (typeof BigInt === "function") {
+            assert.strictEqual(number.parse("1234567n"), BigInt(1234567));
+        }
+    });
+
     it("should parse numbers with signed marks as expected", () => {
         assert.strictEqual(number.parse("+0b0101"), 0b0101);
         assert.strictEqual(number.parse("-0b0101"), -0b0101);
@@ -78,10 +84,17 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("-0o1234567"), -0o1234567);
         assert.strictEqual(number.parse("+1234567"), 1234567);
         assert.strictEqual(number.parse("+1234567.123"), 1234567.123);
+        assert.strictEqual(number.parse("+.123"), +.123);
         assert.strictEqual(number.parse("-1234567"), -1234567);
         assert.strictEqual(number.parse("-1234567.123"), -1234567.123);
+        assert.strictEqual(number.parse("-.123"), -.123);
         assert.strictEqual(number.parse("+0x123abc"), 0x123abc);
         assert.strictEqual(number.parse("-0x123abc"), -0x123abc);
+
+        if (typeof BigInt === "function") {
+            assert.strictEqual(number.parse("+1234567n"), BigInt(1234567));
+            assert.strictEqual(number.parse("-1234567n"), -BigInt(1234567));
+        }
     });
 
     it("should parse scientific notations as expected", () => {
