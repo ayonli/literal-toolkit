@@ -97,7 +97,7 @@ export declare namespace number {
      * Generates a number literal according to the given number. By default, 
      * `radix` is set to `10` (decimal).
      */
-    function toLiteral(num: number, radix?: 2 | 8 | 10 | 16): string;
+    function toLiteral(num: number | bigint, radix?: 2 | 8 | 10 | 16): string;
 }
 
 export declare namespace keyword {

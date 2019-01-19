@@ -24,6 +24,7 @@ describe("Testing numbers from strings", () => {
         assert.strictEqual(number.isDec("1e12"), true);
         assert.strictEqual(number.isDec("1.1e12"), true);
         assert.strictEqual(number.isDec(".123"), true);
+        assert.strictEqual(number.isDec(".1e23"), true);
     });
 
     it("should check hexadecimal numbers as expected", () => {
@@ -32,6 +33,13 @@ describe("Testing numbers from strings", () => {
         assert.strictEqual(number.isHex("0X1F "), true);
         assert.strictEqual(number.isHex("0x1G"), false);
         assert.strictEqual(number.isHex("01F"), false);
+    });
+
+    it("should check BigInt numbers as expected", () => {
+        if (typeof BigInt === "function") {
+            assert.strictEqual(number.isBigInt("1234567n"), true);
+            assert.strictEqual(number.isBigInt("1234567"), false);
+        }
     });
 
     it("should check NaN and Infinity as expected", () => {
@@ -73,12 +81,23 @@ describe("Parsing numbers from strings", () => {
     it("should parse BigInt numbers as expected", () => {
         if (typeof BigInt === "function") {
             assert.strictEqual(number.parse("1234567n"), BigInt(1234567));
+            assert.strictEqual(number.parse("-1234567n"), -BigInt(1234567));
         }
+    });
+
+    it("should parse NaN and Infinity as expected", () => {
+        assert.ok(Number.isNaN(number.parse("NaN")));
+        assert.strictEqual(typeof number.parse("NaN"), "number");
+        assert.ok(Number.isNaN(number.parse("-NaN")));
+        assert.strictEqual(typeof number.parse("-NaN"), "number");
+
+        assert.strictEqual(number.parse("Infinity"), Infinity);
+        assert.strictEqual(number.parse("-Infinity"), -Infinity);
     });
 
     it("should parse numbers with signed marks as expected", () => {
         assert.strictEqual(number.parse("+0b0101"), 0b0101);
-        assert.strictEqual(number.parse("-0b0101"), -0b0101);
+        assert.strictEqual(number.parse("- 0b0101"), -0b0101);
         assert.strictEqual(number.parse("+01234567"), 01234567);
         assert.strictEqual(number.parse("-01234567"), -01234567);
         assert.strictEqual(number.parse("-0o1234567"), -0o1234567);
@@ -103,6 +122,7 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("1e+10"), 1e+10);
         assert.strictEqual(number.parse("1e-10"), 1e-10);
         assert.strictEqual(number.parse("1.1e10"), 1.1e10);
+        assert.strictEqual(number.parse(".1e23"), .1e23);
     });
 
     it("should parse numbers with leading spaces as expected", () => {
@@ -186,13 +206,23 @@ describe("Generating number literals from numbers", () => {
     it("should produce octal, decimal and hexadecimal numbers as expected", () => {
         assert.strictEqual(number.toLiteral(12345, 2), "0b11000000111001");
         assert.strictEqual(number.toLiteral(12345, number.BIN), "0b11000000111001");
+        assert.strictEqual(number.toLiteral(-12345, 2), "-0b11000000111001");
+        assert.strictEqual(number.toLiteral(-12345, number.BIN), "-0b11000000111001");
         assert.strictEqual(number.toLiteral(12345, 8), "0o30071");
         assert.strictEqual(number.toLiteral(12345, number.OCT), "0o30071");
+        assert.strictEqual(number.toLiteral(-12345, 8), "-0o30071");
+        assert.strictEqual(number.toLiteral(-12345, number.OCT), "-0o30071");
         assert.strictEqual(number.toLiteral(12345, 10), "12345");
         assert.strictEqual(number.toLiteral(12345, number.DEC), "12345");
+        assert.strictEqual(number.toLiteral(-12345, 10), "-12345");
+        assert.strictEqual(number.toLiteral(-12345, number.DEC), "-12345");
         assert.strictEqual(number.toLiteral(12345, 16), "0x3039");
         assert.strictEqual(number.toLiteral(12345, number.HEX), "0x3039");
+        assert.strictEqual(number.toLiteral(-12345, 16), "-0x3039");
+        assert.strictEqual(number.toLiteral(-12345, number.HEX), "-0x3039");
         assert.strictEqual(number.toLiteral(NaN), "NaN");
         assert.strictEqual(number.toLiteral(Infinity), "Infinity");
+        assert.strictEqual(number.toLiteral(-NaN), "NaN");
+        assert.strictEqual(number.toLiteral(-Infinity), "-Infinity");
     });
 });
