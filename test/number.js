@@ -224,5 +224,16 @@ describe("Generating number literals from numbers", () => {
         assert.strictEqual(number.toLiteral(Infinity), "Infinity");
         assert.strictEqual(number.toLiteral(-NaN), "NaN");
         assert.strictEqual(number.toLiteral(-Infinity), "-Infinity");
+
+        if (typeof BigInt === "function") {
+            assert.strictEqual(number.toLiteral(BigInt(12345)), "12345n");
+            assert.strictEqual(number.toLiteral(-BigInt(12345)), "-12345n");
+            assert.strictEqual(number.toLiteral(BigInt(12345), 2), "0b11000000111001n");
+            assert.strictEqual(number.toLiteral(-BigInt(12345), 2), "-0b11000000111001n");
+            assert.strictEqual(number.toLiteral(BigInt(12345), 8), "0o30071n");
+            assert.strictEqual(number.toLiteral(-BigInt(12345), 8), "-0o30071n");
+            assert.strictEqual(number.toLiteral(BigInt(12345), 16), "0x3039n");
+            assert.strictEqual(number.toLiteral(-BigInt(12345), 16), "-0x3039n");
+        }
     });
 });
