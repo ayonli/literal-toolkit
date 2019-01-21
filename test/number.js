@@ -111,7 +111,7 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("-0x123abc"), -0x123abc);
 
         if (typeof BigInt === "function") {
-            assert.strictEqual(number.parse("+1234567n"), BigInt(1234567));
+            assert.strictEqual(number.parse("+1234567n"), undefined);
             assert.strictEqual(number.parse("-1234567n"), -BigInt(1234567));
         }
     });
