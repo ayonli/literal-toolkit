@@ -81,7 +81,7 @@ describe("Parsing numbers from strings", () => {
     it("should parse BigInt numbers as expected", () => {
         if (typeof BigInt === "function") {
             assert.strictEqual(number.parse("1234567n"), BigInt(1234567));
-            assert.strictEqual(number.parse("-1234567n"), -BigInt(1234567));
+            assert.strictEqual(number.parse("-1234567n"), BigInt(-1234567));
         }
     });
 
@@ -111,8 +111,8 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("-0x123abc"), -0x123abc);
 
         if (typeof BigInt === "function") {
-            assert.strictEqual(number.parse("+1234567n"), BigInt(1234567));
-            assert.strictEqual(number.parse("-1234567n"), -BigInt(1234567));
+            assert.strictEqual(number.parse("+1234567n"), undefined);
+            assert.strictEqual(number.parse("-1234567n"), BigInt(-1234567));
         }
     });
 
@@ -227,13 +227,13 @@ describe("Generating number literals from numbers", () => {
 
         if (typeof BigInt === "function") {
             assert.strictEqual(number.toLiteral(BigInt(12345)), "12345n");
-            assert.strictEqual(number.toLiteral(-BigInt(12345)), "-12345n");
+            assert.strictEqual(number.toLiteral(BigInt(-12345)), "-12345n");
             assert.strictEqual(number.toLiteral(BigInt(12345), 2), "0b11000000111001n");
-            assert.strictEqual(number.toLiteral(-BigInt(12345), 2), "-0b11000000111001n");
+            assert.strictEqual(number.toLiteral(BigInt(-12345), 2), "-0b11000000111001n");
             assert.strictEqual(number.toLiteral(BigInt(12345), 8), "0o30071n");
-            assert.strictEqual(number.toLiteral(-BigInt(12345), 8), "-0o30071n");
+            assert.strictEqual(number.toLiteral(BigInt(-12345), 8), "-0o30071n");
             assert.strictEqual(number.toLiteral(BigInt(12345), 16), "0x3039n");
-            assert.strictEqual(number.toLiteral(-BigInt(12345), 16), "-0x3039n");
+            assert.strictEqual(number.toLiteral(BigInt(-12345), 16), "-0x3039n");
         }
     });
 });
