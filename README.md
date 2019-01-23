@@ -32,9 +32,9 @@ functions that can be used to parse and generate literals.
 
 - `number`
     - `NumberToken` extends `LiteralToken`
-        - `value: number`
+        - `value: number | bigint`
         - `radix: 2 | 8 | 10 | 16`
-    - `parse(str: string, strict?: boolean): number`
+    - `parse(str: string, strict?: boolean): number | bigint`
     - `parseToken(str: string): NumberToken`
     - `isBin(str: string): boolean`
     - `isOct(str: string): boolean`
@@ -42,7 +42,8 @@ functions that can be used to parse and generate literals.
     - `isHex(str: string): boolean`
     - `isNaN(str: string): boolean`
     - `isFinite(str: string): boolean`
-    - `toLiteral(num: number, radix?: 2 | 8 | 10 | 16): string`
+    - `isBigInt(str: string): boolean`
+    - `toLiteral(num: number | bigint, radix?: 2 | 8 | 10 | 16): string`
 
 - `keyword` Includes `true`, `false`, `null`, `NaN` and `Infinity`
     - `KeywordToken` extends `LiteralToken`
