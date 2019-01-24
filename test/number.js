@@ -73,7 +73,7 @@ describe("Parsing numbers from strings", () => {
 
     it("should parse hexadecimal numbers as expected", () => {
         assert.strictEqual(number.parse("0x1234567"), 0x1234567);
-        assert.strictEqual(number.parse("0x123abc"), 0x123abc);
+        assert.strictEqual(number.parse("0x123abcdef"), 0x123abcdef);
         assert.strictEqual(number.parse("0X123ABC"), 0x123abc);
         assert.strictEqual(number.parse("0x123abc.123"), 0x123abc);
     });
@@ -81,7 +81,10 @@ describe("Parsing numbers from strings", () => {
     it("should parse BigInt numbers as expected", () => {
         if (typeof BigInt === "function") {
             assert.strictEqual(number.parse("1234567n"), BigInt(1234567));
-            assert.strictEqual(number.parse("-1234567n"), BigInt(-1234567));
+            assert.strictEqual(number.parse("0b101010n"), BigInt("0b101010"));
+            assert.strictEqual(number.parse("0o12343445n"), BigInt("0o12343445"));
+            assert.strictEqual(number.parse("0x123abcn"), BigInt("0x123abc"));
+            assert.strictEqual(number.parse("012343445n"), undefined);
         }
     });
 
@@ -113,6 +116,9 @@ describe("Parsing numbers from strings", () => {
         if (typeof BigInt === "function") {
             assert.strictEqual(number.parse("+1234567n"), undefined);
             assert.strictEqual(number.parse("-1234567n"), BigInt(-1234567));
+            assert.strictEqual(number.parse("-0b101010n"), -BigInt("0b101010"));
+            assert.strictEqual(number.parse("-0o12343445n"), -BigInt("0o12343445"));
+            assert.strictEqual(number.parse("-0x123abcn"), -BigInt("0x123abc"));
         }
     });
 
