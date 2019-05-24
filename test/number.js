@@ -69,6 +69,7 @@ describe("Parsing numbers from strings", () => {
         assert.strictEqual(number.parse("1234567.123"), 1234567.123);
         assert.strictEqual(number.parse("0123456789"), 123456789);
         assert.strictEqual(number.parse(".123"), 0.123);
+        assert.strictEqual(number.parse("0.123"), 0.123);
     });
 
     it("should parse hexadecimal numbers as expected", () => {
