@@ -58,6 +58,7 @@ export declare namespace number {
          */
         value: number | bigint;
         radix: 2 | 8 | 10 | 16;
+        type: "int" | "bigint" | "float";
     }
 
     const BIN: 2;

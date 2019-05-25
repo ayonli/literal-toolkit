@@ -181,7 +181,8 @@ describe("Parsing tokens from number literals", () => {
             radix: 8,
             value: 012345,
             offset: 0,
-            length: 6
+            length: 6,
+            type: "int"
         });
     });
 
@@ -191,7 +192,8 @@ describe("Parsing tokens from number literals", () => {
             radix: 8,
             value: 012345,
             offset: 4,
-            length: 6
+            length: 6,
+            type: "int"
         });
     });
 
@@ -202,12 +204,48 @@ describe("Parsing tokens from number literals", () => {
             radix: 8,
             value: 012345,
             offset: 0,
-            length: 6
+            length: 6,
+            type: "int"
         });
+    });
+
+    it("should parse the float literal as expected", () => {
+        assert.deepStrictEqual(number.parseToken("12345.123"), {
+            source: "12345.123",
+            radix: 10,
+            value: 12345.123,
+            offset: 0,
+            length: 9,
+            type: "float"
+        });
+    });
+
+    it("should parse the bigint literal as expected", () => {
+        if (typeof BigInt === "function") {
+            assert.deepStrictEqual(number.parseToken("12345n"), {
+                source: "12345n",
+                radix: 10,
+                value: BigInt("12345"),
+                offset: 0,
+                length: 6,
+                type: "bigint"
+            });
+        }
     });
 
     it("should return null when the number literal is invalid", () => {
         assert.strictEqual(number.parseToken("012345abc"), null);
+    });
+
+    it("should parse the number literal with trailing dot as expected", () => {
+        assert.deepStrictEqual(number.parseToken("12345."), {
+            source: "12345.",
+            radix: 10,
+            value: 12345,
+            offset: 0,
+            length: 6,
+            type: "int"
+        });
     });
 });
 
