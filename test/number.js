@@ -210,12 +210,12 @@ describe("Parsing tokens from number literals", () => {
     });
 
     it("should parse the float literal as expected", () => {
-        assert.deepStrictEqual(number.parseToken("12345.123"), {
-            source: "12345.123",
+        assert.deepStrictEqual(number.parseToken("8.9"), {
+            source: "8.9",
             radix: 10,
-            value: 12345.123,
+            value: 8.9,
             offset: 0,
-            length: 9,
+            length: 3,
             type: "float"
         });
     });
