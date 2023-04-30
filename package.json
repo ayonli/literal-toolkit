@@ -27,7 +27,7 @@
   "homepage": "https://github.com/hyurl/literal-toolkit#readme",
   "devDependencies": {
     "@types/node": "^10.12.15",
-    "mocha": "^5.2.0"
+    "mocha": "^10.2.0"
   },
   "dependencies": {
     "safe-string-literal": "^1.0.1"
