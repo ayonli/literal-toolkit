@@ -27,7 +27,7 @@
   "homepage": "https://github.com/ayonli/literal-toolkit#readme",
   "devDependencies": {
     "@types/node": "^10.12.15",
-    "mocha": "^6.2.3"
+    "mocha": "^10.2.0"
   },
   "dependencies": {
     "safe-string-literal": "^1.0.5"
